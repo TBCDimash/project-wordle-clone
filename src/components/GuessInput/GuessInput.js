@@ -1,21 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function GuessInput() {
-  const [word, setWord] = React.useState('');
+  const [currentGuess, setCurrentGuess] = useState('');
+  const [guesses, setGuesses] = useState([]);
 
   const handleInputChange = (e) => {
-    e.preventDefault();
     const value = e.target.value.toUpperCase();
-    setWord(value);
+    if (value.length <= 5) {
+      setCurrentGuess(value);
+    }
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (word.length !== 5) {
+    if (currentGuess.length !== 5) {
       alert('Please enter a 5-letter word');
       return;
     }
-    console.log('guess:', word);
-    setWord('');
+    if (guesses.length >= 5) {
+      alert('You have reached the maximum number of attempts');
+      return;
+    }
+    setGuesses([...guesses, currentGuess]);
+    setCurrentGuess('');
   };
 
   return (
@@ -25,12 +32,21 @@ function GuessInput() {
         <input
           id='guess-input'
           type='text'
-          value={word}
+          value={currentGuess}
           onChange={handleInputChange}
           minLength={0}
           maxLength={5}
         />
+        <button type='submit'>Submit</button>
       </form>
+      <div>
+        <h3>Your Guesses:</h3>
+        <ul>
+          {guesses.map((guess, index) => (
+            <li key={index}>{guess}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
