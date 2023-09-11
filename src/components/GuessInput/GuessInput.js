@@ -7,7 +7,8 @@ function GuessInput() {
   const handleInputChange = (e) => {
     const value = e.target.value.toUpperCase();
     if (value.length <= 5) {
-      setCurrentGuess(value);
+      const newGuess = value;
+      setCurrentGuess(newGuess);
     }
   };
 
@@ -17,11 +18,13 @@ function GuessInput() {
       alert('Please enter a 5-letter word');
       return;
     }
-    if (guesses.length >= 5) {
-      alert('You have reached the maximum number of attempts');
+    if (guesses.length > 5) {
+      alert('You have Reached Maximum Attempts');
+      setGuesses([]);
       return;
     }
     setGuesses([...guesses, currentGuess]);
+    console.log(currentGuess);
     setCurrentGuess('');
   };
 
@@ -37,16 +40,7 @@ function GuessInput() {
           minLength={0}
           maxLength={5}
         />
-        <button type='submit'>Submit</button>
       </form>
-      <div>
-        <h3>Your Guesses:</h3>
-        <ul>
-          {guesses.map((guess, index) => (
-            <li key={index}>{guess}</li>
-          ))}
-        </ul>
-      </div>
     </div>
   );
 }
