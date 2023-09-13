@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function GuessInput() {
-  const [currentGuess, setCurrentGuess] = useState('');
-  const [guesses, setGuesses] = useState([]);
+function GuessInput({ setGuesses, guesses }) {
+  const [currentGuess, setCurrentGuess] = React.useState('');
 
   const handleInputChange = (e) => {
     const value = e.target.value.toUpperCase();
@@ -14,11 +13,7 @@ function GuessInput() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (currentGuess.length !== 5) {
-      alert('Please enter a 5-letter word');
-      return;
-    }
-    if (guesses.length > 5) {
+    if (guesses.length >= 6) {
       alert('You have Reached Maximum Attempts');
       setGuesses([]);
       return;
