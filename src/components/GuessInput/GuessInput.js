@@ -5,11 +5,8 @@ function GuessInput({ setGuesses, isGameOver, guesses }) {
   const [currentGuess, setCurrentGuess] = React.useState('');
 
   const handleInputChange = (e) => {
-    const value = e.target.value.toUpperCase();
-    if (value.length <= 5) {
-      const newGuess = value;
-      setCurrentGuess(newGuess);
-    }
+    const newGuess = e.target.value.toUpperCase();
+    setCurrentGuess(newGuess);
   };
 
   const handleSubmit = (e) => {
@@ -32,7 +29,8 @@ function GuessInput({ setGuesses, isGameOver, guesses }) {
         value={currentGuess}
         onChange={handleInputChange}
         disabled={isGameOver}
-        minLength={0}
+        minLength={5}
+        pattern='[a-zA-Z]{5}'
         maxLength={5}
       />
     </form>
