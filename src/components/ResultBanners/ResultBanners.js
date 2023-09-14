@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ResultBanners({ isWinner, isLoser, attemps = 3 }) {
+function ResultBanners({ isWinner, isLoser, attemps, answer }) {
   return (
     <>
       {isWinner && (
@@ -14,7 +14,7 @@ function ResultBanners({ isWinner, isLoser, attemps = 3 }) {
       {isLoser && (
         <div className='sad banner'>
           <p>
-            Sorry, the correct answer is <strong>LEARN</strong>.
+            Sorry, the correct answer is <strong>{answer}</strong>.
           </p>
         </div>
       )}

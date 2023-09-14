@@ -29,6 +29,7 @@ function Game() {
           isWinner={isWinner}
           isLoser={isLoser}
           attemps={guesses.length}
+          answer={answer}
         />
       )}
     </>
